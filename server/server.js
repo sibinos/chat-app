@@ -54,10 +54,15 @@ const PORT = process.env.PORT || 5000;
 const startServer= async ()=>{
     try{
         await connectDB();
-        server.listen(PORT,()=>{console.log('auto restart live server working on port : '+PORT)});
+        if(process.env.NODE_ENV !=="production"){
+            server.listen(PORT,()=>{console.log('auto restart live server working on port : '+PORT)});
+        }
+        
     }catch (error){
         console.log('Startup erorr',error);
     }
 }
 
 startServer()
+
+module.exports=server;
